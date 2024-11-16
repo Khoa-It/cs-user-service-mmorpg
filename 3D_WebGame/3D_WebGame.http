@@ -1,0 +1,6 @@
+@_3D_WebGame_HostAddress = http://localhost:5156
+
+GET {{_3D_WebGame_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
