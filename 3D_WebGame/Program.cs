@@ -1,4 +1,4 @@
-using _3D_WebGame.Configurations;
+﻿using _3D_WebGame.Configurations;
 using _3D_WebGame.Interface;
 using _3D_WebGame.Repositories;
 using _3D_WebGame.Services;
@@ -25,6 +25,17 @@ builder.Services.AddSingleton(provider => {
 });
 builder.Services.AddScoped<IUserService, UserService>();
 
+// Thêm cấu hình CORS
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAllOrigins",
+        policy => {
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +43,10 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Sử dụng CORS
+app.UseCors("AllowAllOrigins");
+
 
 app.UseHttpsRedirection();
 

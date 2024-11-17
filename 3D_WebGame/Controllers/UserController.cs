@@ -26,6 +26,9 @@ namespace _3D_WebGame.Controllers {
         }
         [HttpPost("account")]
         public async Task<IActionResult> getByAccount(AccountDto accountDto) {
+            if (accountDto == null){
+                return GameApiResponse.CreateResponse(null, "", "Can not get account");
+            }
             var data = await iUserService.getByAccount(accountDto);
             return GameApiResponse.CreateResponse(data, "get user by account success", "not found account");
         }
@@ -38,12 +41,18 @@ namespace _3D_WebGame.Controllers {
 
         [HttpPut]
         public async Task<IActionResult> update(UserUpdateDto userUpdateDto) {
+            if (userUpdateDto == null) {
+                return GameApiResponse.CreateResponse(null, "", "Can not update user account");
+            }
             var data = await iUserService.update(userUpdateDto);
             return GameApiResponse.CreateResponse(data, "update user successfull", "not found user to update");
         }
 
         [HttpPost]
         public async Task<IActionResult> create(UserCreateDto userCreateDto){
+            if (userCreateDto == null) {
+                return GameApiResponse.CreateResponse(null, "", "Can not create account");
+            }
             var data = await iUserService.create(userCreateDto);
             return GameApiResponse.CreateResponse(data, "created user successfull", "error created user");
 
