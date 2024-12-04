@@ -25,6 +25,10 @@ builder.Services.AddSingleton(provider => {
 });
 builder.Services.AddScoped<IUserService, UserService>();
 
+builder.Services.AddScoped<FriendshipRepository>();
+builder.Services.AddScoped<FriendshipService>();
+
+
 // Thêm cấu hình CORS
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAllOrigins",
